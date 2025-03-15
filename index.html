@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Name Generator</title>
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon" />
+    <meta
+      name="description"
+      content="Professional File Generator - A GitHub project that helps generate standardized file names for development projects with support for multiple file formats including HTML, CSS, JavaScript, and Python."
+    />
+    <meta
+      name="keywords"
+      content="file generator, development tools, filename converter, GitHub project, web development, code organization, Dus Mamud"
+    />
+    <meta name="author" content="Dus Mamud" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Professional File Generator | GitHub Project"
+    />
+    <meta
+      property="og:description"
+      content="Generate standardized file names for your development projects with our professional file generator tool."
+    />
+    <meta
+      property="og:image"
+      content="https://dusprogram.github.io/file-name-generator/images/desktop-view.jpg"
+    />
+    <meta
+      property="og:url"
+      content="https://dusprogram.github.io/file-name-generator"
+    />
+    <meta property="og:site_name" content="File Generator" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="File Name Generator | GitHub Project" />
+    <meta
+      name="twitter:description"
+      content="Generate standardized file names for your development projects with our professional file generator tool."
+    />
+    <meta
+      name="twitter:image"
+      content="https://dusprogram.github.io/file-name-generator/images/desktop-view.jpg"
+    />
+
+    <!-- GitHub Pages Specific -->
+    <meta name="github-pages-origin" content="true" />
+    <link
+      rel="canonical"
+      href="https://dusprogram.github.io/file-name-generator"
+    />
+
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Professional File Generator",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "INR"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Dus Mamud"
+        },
+        "description": "A professional file name generator for development projects supporting multiple file formats",
+        "softwareVersion": "1.0",
+        "url": "https://dusprogram.github.io/file-name-generator",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "ratingCount": "1"
+        },
+        "featureList": [
+          "Dynamic file name generation",
+          "Multiple format support",
+          "Smart formatting",
+          "One-click copy functionality",
+          "Keyboard shortcuts"
+        ],
+        "screenshot": "https://dusprogram.github.io/file-name-generator/images/desktop-view.jpg",
+        "sourceOrganization": {
+          "@type": "Organization",
+          "name": "GitHub",
+          "url": "https://github.com"
+        }
+      }
+    </script>
+
+    <!-- Additional Technical Meta Tags -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#3b82f6" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>File Name Generator</h1>
+        <p>
+          Generate professional and standardized file names for your project
+        </p>
+      </div>
+
+      <div class="controls">
+        <div class="input-wrapper">
+          <i class="bx bx-text"></i>
+          <input
+            type="text"
+            id="fileName"
+            placeholder="Enter your file name (e.g., Dus Mamud)"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="action-buttons">
+          <button
+            class="btn btn-generate"
+            onclick="generateFiles()"
+            id="generateBtn"
+          >
+            <i class="bx bx-code-alt"></i>
+            <span>Generate</span>
+          </button>
+          <button class="btn btn-clear" onclick="clearAll()" id="clearBtn">
+            <i class="bx bx-trash"></i>
+            <span>Clear</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="filesContainer" class="files-container"></div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I generate file names using this tool?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Simply enter your desired file name in the input field and click the 'Generate' button or press Ctrl+Enter. The tool will automatically create standardized versions for HTML, CSS, JavaScript, and Python files."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What formatting rules are applied to the file names?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The tool applies the following formatting rules: converts text to lowercase, removes special characters, replaces spaces with hyphens, and adds appropriate file extensions (.html, .css, .js, .py)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are there any keyboard shortcuts available?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, the tool supports several keyboard shortcuts: Ctrl+Enter to generate files, Ctrl+L to clear all, and Enter key when the input field is focused to generate files."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I copy the generated file names?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Each generated file name has a 'Copy' button next to it. Click the button to copy the file name to your clipboard. A confirmation toast will appear when successful."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which file types are supported?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The tool currently supports four file types: HTML (.html), CSS (.css), JavaScript (.js), and Python (.py) files."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this tool mobile-friendly?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, the tool is fully responsive and works on all devices including smartphones and tablets. The interface automatically adjusts to provide optimal user experience across different screen sizes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use this tool offline?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Once loaded, the tool works entirely in the browser and doesn't require an internet connection for generating file names. However, the BoxIcons library requires internet connectivity for icons to display properly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I clear all generated file names?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Click the 'Clear' button or use the keyboard shortcut Ctrl+L to remove all generated file names and reset the input field."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which browsers are supported?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The tool works on all modern browsers including Chrome, Firefox, Safari, and Edge. For best experience, ensure your browser supports CSS Grid and backdrop-filter properties."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this tool free to use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, this tool is completely free to use and open source. You can also fork the project from GitHub and modify it according to your needs."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <script src="main.js"></script>
+  </body>
+</html>

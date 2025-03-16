@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Name Generator</title>
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon" />
+    <style>
+      :root {
+        --primary: #3b82f6;
+        --primary-dark: #1d4ed8;
+        --secondary: #2563eb;
+        --success: #059669;
+        --danger: #dc2626;
+        --dark: #030712;
+        --dark-2: #111827;
+        --dark-3: #1f2937;
+        --light: #f9fafb;
+        --gray: #4b5563;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        background: var(--dark);
+        background-image: radial-gradient(at 0% 0%, #1e40af 0, transparent 50%),
+          radial-gradient(at 100% 100%, #1e3a8a 0, transparent 50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1.5rem;
+        color: var(--light);
+      }
+
+      .app-wrapper {
+        width: 100%;
+        max-width: 800px;
+        background: var(--dark-2);
+        border-radius: 1rem;
+        padding: 2rem;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .input-field {
+        position: relative;
+        margin-bottom: 2rem;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 120px;
+        padding: 1rem;
+        background: var(--dark-3);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.75rem;
+        color: var(--light);
+        font-size: 1rem;
+        resize: vertical;
+        transition: all 0.3s ease;
+      }
+
+      textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+      }
+
+      .button-group {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      button {
+        padding: 0.875rem 1.5rem;
+        border: none;
+        border-radius: 0.75rem;
+        font-weight: 600;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .generate-btn {
+        background: var(--primary);
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .generate-btn:hover {
+        background: var(--primary-dark);
+      }
+
+      .generate-btn::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transform: translateX(-100%);
+        animation: shimmer 2s infinite;
+      }
+
+      @keyframes shimmer {
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      .copy-btn {
+        background: var(--success);
+        color: white;
+      }
+
+      .copy-btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      .delete-btn {
+        background: var(--danger);
+        color: white;
+      }
+
+      .delete-btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      .output-section {
+        background: var(--dark-3);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        position: relative;
+      }
+
+      .output-label {
+        font-size: 0.875rem;
+        color: var(--gray);
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+
+      #output {
+        font-family: "JetBrains Mono", monospace;
+        color: var(--light);
+        font-size: 1.125rem;
+        word-break: break-all;
+        line-height: 1.5;
+      }
+
+      .toast {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        background: var(--success);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        opacity: 0;
+        transform: translateY(-1rem);
+        transition: all 0.3s ease;
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 640px) {
+        .app-wrapper {
+          padding: 1.5rem;
+        }
+
+        .button-group {
+          grid-template-columns: 1fr;
+        }
+
+        .title {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app-wrapper">
+      <h1 class="title">File Name Generator</h1>
+
+      <div class="input-field">
+        <textarea
+          id="input"
+          placeholder="Type or paste your text here...&#10;Example: My name is Dus Mamud"
+          aria-label="Input text"
+        ></textarea>
+      </div>
+
+      <div class="button-group">
+        <button class="generate-btn" onclick="generateFileName()">
+          Generate File Name
+        </button>
+        <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
+        <button class="delete-btn" onclick="clearAll()">Delete</button>
+      </div>
+
+      <div class="output-section">
+        <div class="output-label">Generated File Name:</div>
+        <div id="output">-</div>
+      </div>
+    </main>
+
+    <div id="toast" class="toast">Copied to clipboard!</div>
+
+    <script>
+      function generateFileName() {
+        const input = document.getElementById("input").value;
+        if (!input.trim()) {
+          document.getElementById("output").textContent = "-";
+          return;
+        }
+
+        const fileName = input
+          .toLowerCase()
+          .trim()
+          .replace(/[^\w\s-]/g, "")
+          .replace(/\s+/g, "-")
+          .replace(/-+/g, "-");
+
+        document.getElementById("output").textContent = fileName;
+      }
+
+      function copyToClipboard() {
+        const output = document.getElementById("output").textContent;
+        if (output === "-") return;
+
+        navigator.clipboard.writeText(output).then(() => {
+          const toast = document.getElementById("toast");
+          toast.classList.add("show");
+
+          setTimeout(() => {
+            toast.classList.remove("show");
+          }, 2000);
+        });
+      }
+
+      function clearAll() {
+        document.getElementById("input").value = "";
+        document.getElementById("output").textContent = "-";
+      }
+
+      // Auto-generate on input
+      document
+        .getElementById("input")
+        .addEventListener("input", generateFileName);
+    </script>
+  </body>
+</html>
